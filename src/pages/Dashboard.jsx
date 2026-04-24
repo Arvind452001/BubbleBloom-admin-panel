@@ -234,7 +234,6 @@ const Dashboard = () => {
       <style>{`
         .dashboard-container {
           background: #f8f9fc;
-          padding: 1.5rem;
         }
         .gradient-card {
           border: none;
@@ -283,7 +282,6 @@ const Dashboard = () => {
         <h2 className="fw-bold" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
           ✨  Dashboard
         </h2>
-        <div className="badge bg-light text-dark p-2 shadow-sm">📅 April 2026</div>
       </div>
 
       {/* Stats Row 1 - Colorful Cards */}

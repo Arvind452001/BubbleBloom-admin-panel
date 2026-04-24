@@ -26,6 +26,7 @@ export default function Sidebar({ collapsed }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          background: "#ffffff",
           borderBottom: "1px solid #0780b8",
         }}
       >
@@ -35,6 +36,7 @@ export default function Sidebar({ collapsed }) {
           style={{
             width: collapsed ? "40px" : "140px",
             transition: "0.3s",
+            height: "auto",
           }}
         />
       </div>

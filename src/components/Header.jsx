@@ -15,7 +15,7 @@ export default function Header({ title, toggleSidebar }) {
   return (
     <header
       style={{
-        height: "60px",
+        height: "70px",
         borderBottom: "1px solid #eee",
         background: "#fff",
         display: "flex",

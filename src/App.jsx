@@ -63,11 +63,11 @@ function App() {
             <Route path="/children-details/:id" element={<ChildDetails />} />
             <Route path="/audio-records" element={<AudioRecords />} />
             <Route path="/script-logs" element={<ScriptLogsList />} />
-            <Route path="/script-logs/:id" element={<ScriptLogDetails  />} />
-             <Route path="/activities" element={<ActivityList />} />
-  <Route path="/activities/create" element={<ActivityForm />} />
-  <Route path="/activities/edit/:id" element={<ActivityForm />} />
-  <Route path="/activities/:id" element={<ActivityDetails />} />
+            <Route path="/script-logs/:id" element={<ScriptLogDetails />} />
+            <Route path="/activities" element={<ActivityList />} />
+            <Route path="/activities/create" element={<ActivityForm />} />
+            <Route path="/activities/edit/:id" element={<ActivityForm />} />
+            <Route path="/activities/:id" element={<ActivityDetails />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
