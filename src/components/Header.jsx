@@ -1,86 +1,84 @@
 'use client';
 
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
-export default function Header({ title }) {
-  const navigate = useNavigate()
-  const { logout } = useAuth()
+export default function Header({ title, toggleSidebar }) {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleLogout = () => {
-    logout()
-    navigate('/login', { replace: true })
-  }
+    logout();
+    navigate('/login', { replace: true });
+  };
 
   return (
-    <header className="p-0">
-      <div className="header-inner">
-        <div className="page-title">
-          <button
-            id="toggleBtn"
-            className="btn btn-outline-secondary me-2"
-            aria-label="Toggle sidebar"
-          >
-            ☰
-          </button>
-          <h4 className="mb-0">{title}</h4>
-        </div>
-        <div className="header-actions d-flex align-items-center">
-          <div className="dropdown">
-            <button
-              className="btn btn-link d-flex align-items-center text-decoration-none dropdown-toggle"
-              id="userDropdown"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              style={{ border: 'none', background: 'none' }}
-            >
-              <span className="me-2 d-none d-md-inline text-muted small">Admin</span>
-              <img src="/assets/images/avatar.svg" alt="avatar" className="avatar rounded-circle" />
-            </button>
-            <ul
-  className="dropdown-menu dropdown-menu-end"
-  aria-labelledby="userDropdown"
-  style={{ padding: "4px 0", minWidth: "140px" }}
->
-  {/* <li>
-    <button
-      onClick={() => navigate('/my-profile')}
-      className="dropdown-item text-primary"
+    <header
       style={{
-        border: 'none',
-        background: 'none',
-        width: '100%',
-        textAlign: 'left',
-        padding: '6px 10px',
-        fontSize: '14px',
-        lineHeight: '1.2'
+        height: "60px",
+        borderBottom: "1px solid #eee",
+        background: "#fff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "0 15px",
+        position: "sticky",
+        top: 0,
+        zIndex: 1000,
       }}
     >
-      My Profile
-    </button>
-  </li> */}
+      {/* 🔹 LEFT (Toggle + Title) */}
+      <div style={{ display: "flex", alignItems: "center" }}>
 
-  <li>
-    <button
-      onClick={handleLogout}
-      className="dropdown-item text-danger"
-      style={{
-        border: 'none',
-        background: 'none',
-        width: '100%',
-        textAlign: 'left',
-        padding: '6px 10px',
-        fontSize: '14px',
-        lineHeight: '1.2'
-      }}
-    >
-      Logout
-    </button>
-  </li>
-</ul>
-          </div>
-        </div>
+        <button
+          onClick={toggleSidebar}   // ✅ FIXED
+          className="btn btn-outline-secondary me-2"
+          style={{
+            padding: "4px 10px",
+            fontSize: "18px",
+          }}
+        >
+          ☰
+        </button>
+
+        <h5 className="mb-0">{title}</h5>
+      </div>
+
+      {/* 🔹 RIGHT (User Dropdown) */}
+      <div className="dropdown">
+        <button
+          className="btn d-flex align-items-center dropdown-toggle"
+          data-bs-toggle="dropdown"
+          style={{
+            border: "none",
+            background: "transparent",
+          }}
+        >
+       
+
+          <img
+            src="/assets/images/avatar.svg"
+            alt="avatar"
+            className="rounded-circle"
+            width="35"
+            height="35"
+          />
+        </button>
+
+        <ul
+          className="dropdown-menu dropdown-menu-end"
+          style={{ minWidth: "140px" }}
+        >
+          <li>
+            <button
+              onClick={handleLogout}
+              className="dropdown-item text-danger"
+            >
+              Logout
+            </button>
+          </li>
+        </ul>
       </div>
     </header>
-  )
+  );
 }

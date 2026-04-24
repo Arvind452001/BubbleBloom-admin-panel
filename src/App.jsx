@@ -14,8 +14,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Children from "./pages/Children";
 import ChildDetails from "./pages/ChildDetails";
 import AudioRecords from "./pages/AudioRecords";
-import Predictions from "./pages/Predictions";
-import TrainingData from "./pages/TrainingData";
 import Feedback from "./pages/Feedback";
 import Analytics from "./pages/Analytics";
 import Notifications from "./components/Notifications";
@@ -24,6 +22,11 @@ import Admins from "./pages/Admins";
 import Settings from "./pages/Settings";
 import FaqPage from "./pages/FaqPage";
 import ContactPage from "./pages/ContactPage";
+import ScriptLogsList from "./pages/ScriptLogsList";
+import ScriptLogDetails from "./pages/ScriptLogDetails";
+import ActivityForm from "./pages/ActivityForm";
+import ActivityList from "./pages/ActivityList";
+import ActivityDetails from "./pages/ActivityDetails";
 
 function App() {
   return (
@@ -37,7 +40,6 @@ function App() {
         <ToastContainer position="top-right" autoClose={3000} />
 
         <Routes>
-
           {/* 🔓 PUBLIC ROUTES */}
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
@@ -60,19 +62,22 @@ function App() {
             <Route path="/children" element={<Children />} />
             <Route path="/children-details/:id" element={<ChildDetails />} />
             <Route path="/audio-records" element={<AudioRecords />} />
-            <Route path="/ai-predictions" element={<Predictions />} />
-            <Route path="/training-data" element={<TrainingData />} />
+            <Route path="/script-logs" element={<ScriptLogsList />} />
+            <Route path="/script-logs/:id" element={<ScriptLogDetails  />} />
+             <Route path="/activities" element={<ActivityList />} />
+  <Route path="/activities/create" element={<ActivityForm />} />
+  <Route path="/activities/edit/:id" element={<ActivityForm />} />
+  <Route path="/activities/:id" element={<ActivityDetails />} />
             <Route path="/feedback" element={<Feedback />} />
-              <Route path="/faq" element={<FaqPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-                <Route path="/notifications" element={<Notifications />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/notifications" element={<Notifications />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/admins" element={<Admins />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
-
         </Routes>
       </AuthProvider>
     </BrowserRouter>

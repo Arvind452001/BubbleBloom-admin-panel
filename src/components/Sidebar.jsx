@@ -1,86 +1,183 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({ collapsed }) {
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <nav id="sidebar" className="sidebar text-white">
-      
-      {/* Header */}
-      <div className="sidebar-header p-0 d-flex align-items-center justify-content-center">
+    <nav
+      style={{
+        width: collapsed ? "0px" : "240px",
+        transition: "all 0.3s ease",
+        minHeight: "100vh",
+        background: "#005780",
+        color: "#fff",
+        position: "fixed",
+        left: 0,
+        top: 0,
+        overflowX: "hidden",
+      }}
+    >
+      {/* 🔹 Logo */}
+      <div
+        style={{
+          height: "70px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderBottom: "1px solid #0780b8",
+        }}
+      >
         <img
           src="/assets/images/logo.png"
           alt="logo"
-          style={{ width: "150px" }}
+          style={{
+            width: collapsed ? "40px" : "140px",
+            transition: "0.3s",
+          }}
         />
       </div>
 
-      <ul className="nav flex-column px-2 pt-3">
+      {/* 🔹 Menu */}
+      <ul style={{ listStyle: "none", padding: "10px", margin: 10 }}>
+        {/* Dashboard */}
+        <li>
+          <Link
+            to="/dashboard"
+            style={{
+              display: "flex",
 
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/dashboard">
-            <i className="fa fa-home me-2"></i> Dashboard
+              alignItems: "center",
+              padding: "10px",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "6px",
+              background: isActive("/dashboard") ? "#0780b8" : "transparent",
+            }}
+          >
+            <i className="fa fa-home" style={{ minWidth: "25px" }}></i>
+            {!collapsed && <span>Dashboard</span>}
           </Link>
         </li>
 
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/users">
-            <i className="fa fa-users me-2"></i> Users
+        {/* Users */}
+        <li>
+          <Link
+            to="/users"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              padding: "10px",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "6px",
+              background: isActive("/users") ? "#0780b8" : "transparent",
+            }}
+          >
+            <i className="fa fa-users" style={{ minWidth: "25px" }}></i>
+            {!collapsed && <span>Users</span>}
           </Link>
         </li>
 
-        {/* <li className="nav-item">
-          <Link className="nav-link text-white" to="/children">
-            <i className="fa fa-child me-2"></i> Children
+        {/* Script Logs */}
+        <li>
+          <Link
+            to="/script-logs"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              padding: "10px",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "6px",
+              background: isActive("/script-logs") ? "#0780b8" : "transparent",
+            }}
+          >
+            <i className="fa fa-robot" style={{ minWidth: "25px" }}></i>
+            {!collapsed && <span>Script List</span>}
           </Link>
-        </li> */}
-
-        {/* <li className="nav-item">
-          <Link className="nav-link text-white" to="/audio-records">
-            <i className="fa fa-microphone me-2"></i> Audio Records
+        </li>
+        {/* Script Logs */}
+        <li>
+          <Link
+            to="/activities"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              padding: "10px",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "6px",
+              background: isActive("/activities") ? "#0780b8" : "transparent",
+            }}
+          >
+            <i className="bi bi-activity" style={{ minWidth: "25px" }}></i>
+            {!collapsed && <span>Activities</span>}
           </Link>
-        </li> */}
-
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/ai-predictions">
-            <i className="fa fa-robot me-2"></i> AI Predictions
+        </li>
+        {/* FAQ */}
+        <li>
+          <Link
+            to="/faq"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              padding: "10px",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "6px",
+              background: isActive("/faq") ? "#0780b8" : "transparent",
+            }}
+          >
+            <i
+              className="fa fa-question-circle"
+              style={{ minWidth: "25px" }}
+            ></i>
+            {!collapsed && <span>FAQ</span>}
           </Link>
         </li>
 
-        {/* <li className="nav-item">
-          <Link className="nav-link text-white" to="/training-data">
-            <i className="fa fa-database me-2"></i> Training Data
-          </Link>
-        </li> */}
-
-        {/* <li className="nav-item">
-          <Link className="nav-link text-white" to="/feedback">
-            <i className="fa fa-comment-dots me-2"></i> Feedback
-          </Link>
-        </li> */}
-
-          <li className="nav-item">
-          <Link className="nav-link text-white" to="/faq">
-            <i className="fa fa-question-circle me-2"></i> FAQ
-          </Link>
-        </li>
-
-         <li className="nav-item">
-          <Link className="nav-link text-white" to="/contact">
-            <i className="fa fa-envelope me-2"></i> Contact
+        {/* Contact */}
+        <li>
+          <Link
+            to="/contact"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              padding: "10px",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "6px",
+              background: isActive("/contact") ? "#0780b8" : "transparent",
+            }}
+          >
+            <i className="fa fa-envelope" style={{ minWidth: "25px" }}></i>
+            {!collapsed && <span>Contact</span>}
           </Link>
         </li>
 
-          <li className="nav-item">
-          <Link className="nav-link text-white" to="/notifications">
-            <i className="fa fa-bell me-2"></i> Notifications
+        {/* Notifications */}
+        <li>
+          <Link
+            to="/notifications"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              padding: "10px",
+              color: "#fff",
+              textDecoration: "none",
+              borderRadius: "6px",
+              background: isActive("/notifications")
+                ? "#0780b8"
+                : "transparent",
+            }}
+          >
+            <i className="fa fa-bell" style={{ minWidth: "25px" }}></i>
+            {!collapsed && <span>Notifications</span>}
           </Link>
         </li>
-
-       
-
       </ul>
     </nav>
   );
 }
-
-
-
