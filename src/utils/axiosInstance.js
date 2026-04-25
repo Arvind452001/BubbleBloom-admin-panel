@@ -45,4 +45,31 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// ================= RESPONSE INTERCEPTOR ================= //
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    // 🔴 Handle Unauthorized (token expired)
+    if (error.response?.status === 401) {
+      console.log("🔒 Token expired");
+
+      // ❌ Remove token
+      localStorage.removeItem("authToken");
+
+      // 👉 Optional: clear other user data
+      localStorage.removeItem("user");
+
+      // 👉 Redirect to login
+      window.location.href = "/login";
+
+      // 👉 Optional message (better UX)
+      alert("Session expired. Please login again.");
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export default axiosInstance;

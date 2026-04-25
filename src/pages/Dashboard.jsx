@@ -29,117 +29,7 @@ ChartJS.register(
 );
 
 // Sample data (same as before)
-const sampleDashboardData = {
-  status: 1,
-  message: 'Dashboard statistics fetched successfully',
-  data: {
-    overview: {
-      total_parents: 8,
-      total_children: 6,
-      total_script_logs: 6,
-      total_activities: 48,
-      total_faqs: 35,
-      total_stages: 0,
-      total_notifications: 4,
-      total_contact_messages: 2,
-    },
-    users: {
-      total: 8,
-      active: 8,
-      verified: 8,
-      new_this_month: 8,
-      onboarding_completion_rate: 0.0,
-      verification_rate: 100.0,
-      registration_trend: [
-        { month: 'November 2025', count: 0 },
-        { month: 'December 2025', count: 0 },
-        { month: 'January 2026', count: 0 },
-        { month: 'January 2026', count: 0 },
-        { month: 'March 2026', count: 0 },
-        { month: 'April 2026', count: 8 },
-      ],
-    },
-    children: {
-      total: 6,
-      new_this_month: 6,
-      average_per_parent: 0.75,
-      by_gender: [
-        { gender: 'Female', count: 1 },
-        { gender: 'Male', count: 3 },
-        { gender: 'male', count: 2 },
-      ],
-      by_communication_level: [
-        { level: 'Non', count: 1 },
-        { level: 'Normal', count: 1 },
-        { level: 'Test ', count: 1 },
-        { level: 'V', count: 1 },
-        { level: 'toys', count: 2 },
-      ],
-    },
-    script_logs: {
-      total: 6,
-      new_this_month: 6,
-      active_users: 4,
-      average_per_parent: 1.5,
-      average_ai_confidence: 0,
-      top_behaviors: [
-        { behavior_type: 'Scripted language with emotional communication', count: 5 },
-        { behavior_type: 'Scripted language with functional request', count: 1 },
-      ],
-      monthly_trend: [
-        { month: 'November 2025', count: 0 },
-        { month: 'December 2025', count: 0 },
-        { month: 'January 2026', count: 0 },
-        { month: 'January 2026', count: 0 },
-        { month: 'March 2026', count: 0 },
-        { month: 'April 2026', count: 6 },
-      ],
-    },
-    activities: {
-      total: 48,
-      active: 48,
-      system: 1,
-      custom: 47,
-      total_scripts: 544,
-      by_category: [
-        { category: 'daily_activities', count: 9 },
-        { category: 'movement_play', count: 8 },
-        { category: 'open_ended_play', count: 8 },
-        { category: 'pretend_play', count: 23 },
-      ],
-    },
-    stage_hub: { total: 0, active: 0 },
-    notifications: {
-      total: 4,
-      unread: 4,
-      new_this_month: 4,
-      by_type: [
-        { type: 'alert', count: 2 },
-        { type: 'general', count: 2 },
-      ],
-    },
-    contact_messages: { total: 2, new_this_month: 2 },
-    engagement: {
-      onboarding_completion_rate: 0.0,
-      verification_rate: 100.0,
-      avg_children_per_parent: 0.75,
-      avg_scripts_per_parent: 1.5,
-      script_usage_percentage: 50.0,
-    },
-    recent_activity_7_days: {
-      new_users: 2,
-      new_children: 1,
-      new_scripts: 2,
-      new_messages: 1,
-    },
-    top_users: [
-      { parent_id: 5, full_name: 'Govind Singh', email: 'gs@yopmail.com', script_count: 3 },
-      { parent_id: 2, full_name: 'Josh', email: 'happy@gmail.com', script_count: 1 },
-      { parent_id: 3, full_name: 'Kapil', email: 'kapi@gmail.com', script_count: 1 },
-      { parent_id: 9, full_name: 'Testing Account', email: 'testingacc@gmail.com', script_count: 1 },
-    ],
-  },
-};
+
 
 const aggregateMonthlyData = (trend) => {
   const aggregated = {};
@@ -156,20 +46,20 @@ const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getDashboardStats();
-        console.log("Fetched dashboard data:", data);
-        setDashboardData(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const res = await getDashboardStats();
+      setDashboardData(res.data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, []);
 
   if (loading || !dashboardData) {
     return (
@@ -381,9 +271,9 @@ const Dashboard = () => {
       {/* Footer Stats */}
       <div className="row g-4">
         <div className="col-md-3"><div className="card text-center p-3 shadow-sm" style={{ background: 'linear-gradient(145deg, #FFF0F5, #FFE4E9)' }}><h6>Total FAQs</h6><h3 className="fw-bold text-danger">{overview.total_faqs}</h3></div></div>
-        <div className="col-md-3"><div className="card text-center p-3 shadow-sm" style={{ background: 'linear-gradient(145deg, #E8F4FF, #D9EEFF)' }}><h6>Total Stages</h6><h3 className="fw-bold text-info">{overview.total_stages}</h3><small>Stage Hub</small></div></div>
+        <div className="col-md-3"><div className="card text-center p-3 shadow-sm" style={{ background: 'linear-gradient(145deg, #E8F4FF, #D9EEFF)' }}><h6>Total Stages</h6><h3 className="fw-bold text-info">{overview.total_stages}</h3></div></div>
         <div className="col-md-3"><div className="card text-center p-3 shadow-sm" style={{ background: 'linear-gradient(145deg, #F0FFF0, #E0FFE0)' }}><h6>Total Scripts in Activities</h6><h3 className="fw-bold text-success">{activities.total_scripts}</h3></div></div>
-        <div className="col-md-3"><div className="card text-center p-3 shadow-sm" style={{ background: 'linear-gradient(145deg, #FFF7E0, #FFEFC0)' }}><h6>Custom Activities</h6><h3 className="fw-bold text-warning">{activities.custom}</h3><small>of {activities.total}</small></div></div>
+        <div className="col-md-3"><div className="card text-center p-3 shadow-sm" style={{ background: 'linear-gradient(145deg, #FFF7E0, #FFEFC0)' }}><h6>Custom Activities</h6><h3 className="fw-bold text-warning">{activities.custom}/{activities.total}</h3></div></div>
       </div>
     </div>
   );
